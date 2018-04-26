@@ -1,5 +1,4 @@
 
-
 from nltk.corpus import stopwords
 
 class Stopper:

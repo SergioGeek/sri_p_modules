@@ -116,21 +116,3 @@ class Index:
 			self.normalizeWeights.append( auxDic )
 			i += 1
 
-
-		
-
-	def leer( self ):
-
-		print( self.nameIndex[0] )
-		print( "NORMALEEEEEEEEEEEEEEEEEEEEEEEEEEES" )
-		print( self.index[0].keys() )
-		print( "PESOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS" )
-		print( self.normalizeWeights[0].keys() )
-		
-
-
-	
-		
-
-		
-

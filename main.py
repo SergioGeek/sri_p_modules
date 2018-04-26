@@ -440,8 +440,6 @@ if __name__ == "__main__":
 
 	index.normalizeWeightsCalc()
 
-	#index.leer()
-
 
 	seObject = open( confg_file["PATHS"]["WritingPath"] + "serializable_object/index", "wb" )
 
