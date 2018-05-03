@@ -7,6 +7,8 @@ from modules.stemmer_module import Stemmer
 
 from modules.index import Index
 
+from modules.query import Query
+
 import _pickle as pickle
 
 import operator
@@ -16,7 +18,8 @@ if __name__ == "__main__":
 
 
 
-	consulta = "loco"
+	consulta = "La Asociación Española Contra el Cáncer con sede en Linares, organiza la 3ª edición de NOCHE MÁGICA DORADA,que será el próximo 22 de Octubre a las 8 de la tarde en el Teatro Cervanters de Linares,dónde actuarán grandes artistas, como la gran pianista Marisa Montiel, las sopranos Mº Eugenia Boix,Cecilia Gallego, Susana Jannes y los tenores Joaquín Robles y Francisco Heredia, como pianista acompañante Mariano Hernández. Posteriormente se realizará una cena-cóctel en el Hotel Anibal en dónde habrá un espectáculo flamenco a cargo del Ballet de Mª del Mar Ramírez y Raquel Parrilla."
+
 
 	tokenizer = Tokenizer( consulta )
 
@@ -30,11 +33,15 @@ if __name__ == "__main__":
 
 	stemmer.stemming( stopper.stoppedList )
 
-	indexQ = Index()
+	query = Query()
 
-	indexQ.add( "loco", stemmer.stmDic )
+	query.add( consulta, stemmer.stmDic )
 
-	indexQ.normalize()
+	#print( query.index )
+
+	query.normalize()
+
+	#print( query.normalizeIndex )
 
 	seriObject = open( "/home/anonymous/Desktop/serializable_object/index", "rb" )
 
@@ -42,18 +49,25 @@ if __name__ == "__main__":
 
 	seriObject.close()
 
-	indexQ.IDFs = index.IDFs
+	query.IDFs = index.IDFs
 
-	indexQ.weightsCalc()
+	#print( indexQ.IDFs)
 
-	indexQ.normCalc()
+	query.weightsCalc()
 
-	indexQ.normalizeWeightsCalc()
+	#print( query.weights )
 
-	i = 0
+	#print( max(query.weights.values()) )
 
-	
+	query.normCalc()
 
+	#print( query.norm )
+
+	query.normalizeWeightsCalc()
+
+	print( query.normalizeWeights )
+
+	"""
 	sim = {}
 	
 	for inw, val in enumerate(index.normalizeWeights):
@@ -69,6 +83,7 @@ if __name__ == "__main__":
 		calc = summ / (index.norm[inw] * indexQ.norm[0])
 
 		if calc != 0:
+
 			sim[index.nameIndex[inw]] = calc
 
 
@@ -79,4 +94,6 @@ if __name__ == "__main__":
 
 	result.reverse()
 
-	print( result )
+	#print( result )
+
+	"""
