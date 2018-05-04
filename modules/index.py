@@ -6,6 +6,8 @@ class Index:
 
 	def __init__( self ):
 
+		self.loco = "Hola"
+
 		self.nameIndex = []
 		self.index = []
 		self.normalizeIndex = []
@@ -14,6 +16,7 @@ class Index:
 		self.weights = []
 		self.norm = []
 		self.normalizeWeights = []
+		
 
 
 	def add( self, fichName, stmDic ):
@@ -116,3 +119,20 @@ class Index:
 			self.normalizeWeights.append( auxDic )
 			i += 1
 
+
+
+	def normalizeNormCalc( self ):
+
+		self.norm = []
+
+		for wths in self.normalizeWeights:
+
+			aux = 0
+
+			for wthsk, wthsv in wths.items():
+
+				aux += pow( wthsv, 2 )
+
+			self.norm.append( sqrt( aux ) )
+
+		
