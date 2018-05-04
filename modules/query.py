@@ -1,5 +1,5 @@
 
-from math import log10, sqrt
+from math import sqrt
 
 class Query:
 
@@ -15,44 +15,44 @@ class Query:
 		self.normalizeWeights = {}
 
 
-	def add( self, querySTR, stmDic ):
+	def add( self, querySTR, stmDic ): # Añado la consulta y un diccionario resultante del stemmer( raíz / nº de veces que aparece)
 		
 		self.index = stmDic.copy()
 		self.query = querySTR
 
 
 
-	def normalize( self ):
+	def normalize( self ): # Normaliza la consulta
 
-		aux = max( self.index.values() )
-
+		aux = max( self.index.values() ) # Obtengo el mayor de los valores del dicionario( el número de la paralabra
+						 # qué más veces sale
 		for di, vi in self.index.items():
 
-			self.normalizeIndex[di] = vi/aux
+			self.normalizeIndex[di] = vi/aux # Divido todos los valores del diccionario por el máximo
 
 
 
-	def weightsCalc( self ):
+	def weightsCalc( self ): # Calula los pesos
 
-		for dick, dicv in self.normalizeIndex.items():
+		for dick, dicv in self.normalizeIndex.items(): # Itero en el TF normalizado
 
 			if dick in self.IDFs:
 
-				self.weights[dick] = dicv * self.IDFs[dick]
+				self.weights[dick] = dicv * self.IDFs[dick] # Multiplico los TFn por sus IDFs
 		
 
-	def normCalc( self ):
+	def normCalc( self ): # Calcula la norma para los pesos normalizados
 
-		for wthsk, wthsv in self.weights.items():
+		for wthsk, wthsv in self.weights.items(): # Itero en los pesos
 
-			self.norm += pow( wthsv, 2 )
+			self.norm += pow( wthsv, 2 ) # Elevo al cuadrado los pesos y los voy acumulando
 
-		self.norm = sqrt( self.norm )
+		self.norm = sqrt( self.norm ) # Finalmente hago la raíz cuadrada de la suma acumulada
 	
 
-	def normalizeWeightsCalc( self ):
+	def normalizeWeightsCalc( self ): # Calcula los pesos normalizados
 
-		for wthsk, wthsv in self.weights.items():
+		for wthsk, wthsv in self.weights.items(): # Itero en los pesos
 
-			self.normalizeWeights[wthsk] = wthsv / self.norm
+			self.normalizeWeights[wthsk] = wthsv / self.norm # Divido los pesos por la norma
 			

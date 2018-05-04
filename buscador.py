@@ -65,22 +65,21 @@ if __name__ == "__main__":
 
 	query.normalizeWeightsCalc()
 
-	print( query.normalizeWeights )
+	#print( query.normalizeWeights )
 
-	"""
 	sim = {}
 	
 	for inw, val in enumerate(index.normalizeWeights):
 
 		summ = 0
 
-		for iqnw in indexQ.normalizeWeights[0]:
+		for iqnw in query.normalizeWeights:
 
 			if iqnw in val:
 
-				summ += indexQ.normalizeWeights[0][iqnw] * val[iqnw]
+				summ += query.normalizeWeights[iqnw] * val[iqnw]
 
-		calc = summ / (index.norm[inw] * indexQ.norm[0])
+		calc = summ / (index.norm[inw] * query.norm)
 
 		if calc != 0:
 
@@ -94,6 +93,4 @@ if __name__ == "__main__":
 
 	result.reverse()
 
-	#print( result )
-
-	"""
+	print( result )
