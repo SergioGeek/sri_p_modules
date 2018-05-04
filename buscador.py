@@ -67,6 +67,9 @@ if __name__ == "__main__":
 
 	#print( query.normalizeWeights )
 
+	query.normalizeNormCalc()
+
+	###Cálculo de la Similitud
 	sim = {}
 	
 	for inw, val in enumerate(index.normalizeWeights):
@@ -79,7 +82,7 @@ if __name__ == "__main__":
 
 				summ += query.normalizeWeights[iqnw] * val[iqnw]
 
-		calc = summ / (index.norm[inw] * query.norm)
+		calc = summ / (index.norm[inw] * query.normalizeNorm)
 
 		if calc != 0:
 

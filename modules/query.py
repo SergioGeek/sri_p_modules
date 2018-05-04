@@ -12,6 +12,7 @@ class Query:
 		self.IDFs = {}
 		self.weights = {}
 		self.norm = 0
+		self.normalizeNorm = 0
 		self.normalizeWeights = {}
 
 
@@ -55,4 +56,14 @@ class Query:
 		for wthsk, wthsv in self.weights.items(): # Itero en los pesos
 
 			self.normalizeWeights[wthsk] = wthsv / self.norm # Divido los pesos por la norma
+
+
+	def normalizeNormCalc( self ):
+
+		for wthsk, wthsv in self.normalizeWeights.items(): # Itero en los pesos normalizados
+
+			self.normalizeNorm += pow( wthsv, 2 ) # Elevo al cuadrado los pesos y los voy acumulando
+
+		self.normalizeNorm = sqrt( self.normalizeNorm ) # Finalmente hago la raíz cuadrada de la suma acumulada
+		
 			
