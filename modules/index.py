@@ -6,8 +6,6 @@ class Index:
 
 	def __init__( self ):
 
-		self.loco = "Hola"
-
 		self.nameIndex = []
 		self.index = []
 		self.normalizeIndex = []
@@ -16,13 +14,19 @@ class Index:
 		self.weights = []
 		self.norm = []
 		self.normalizeWeights = []
+
+		self.scrappedIndex = []
+
 		
 
 
-	def add( self, fichName, stmDic ):
+	def add( self, fichName, stmDic, sf ):
 		
 		self.index.append( stmDic.copy() )
 		self.nameIndex.append( fichName )
+		self.scrappedIndex.append( sf )
+
+		
 
 
 

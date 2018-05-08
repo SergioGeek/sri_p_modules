@@ -9,6 +9,13 @@ class Filter:
 
 		self.soup = BeautifulSoup( html_file, "lxml" ) # Objeto para parsear el html
 		self.text = "" # texto plano extraido del fichero
+
+		self.title = ""
+		self.date = ""
+		self.body = ""
+		self.tags = []
+		self.rute = []
+		self.author = ""
 		
 
 	#Función que filtra los documentos html
@@ -17,33 +24,38 @@ class Filter:
 	
 		# Get Title
 		self.text = self.soup.title.text
+		self.title = self.soup.title.text
 
 
 		# Get Date
 		date = self.soup.find( "div", attrs = {"class" : "field-item odd"} )
 		self.text = self.text + " " + date.find( "span" ).text
+		self.date = date.find( "span" ).text
 
 		#Get Body
 		body = self.soup.find_all( "p" )
 		for bd in body:
 			self.text = self.text + " " + bd.text
+			self.body += " " + bd.text
 	
 	
 		# Get Tags
 		topics = self.soup.find_all( "a", attrs = {"rel" : "tag"} )
 		for i in topics:
 			self.text = self.text + " " + i.text
+			self.tags.append( i.text )
 
 		# Get Rute
 		rute = self.soup.find("div", attrs = {"class" : "breadcrumb"})
 		for rt in rute.find_all("a"):
-			self.text = self.text + " " + rt.text 
-		
+			self.text = self.text + " " + rt.text
+			self.rute.append( rt.text )
 
 		# Get Author
 		author = self.soup.find("div", attrs = {"class" : "submitted"})
 		user = author.text.split()
 		self.text = self.text + " " + user[2]
+		self.author = user[2]
 	
 
 		return self.text
