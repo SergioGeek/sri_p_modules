@@ -16,13 +16,17 @@ class Index:
 		self.weights = []
 		self.norm = []
 		self.normalizeWeights = []
+		self.title = []
+		self.body = []
 		
 
 
-	def add( self, fichName, stmDic ):
+	def add( self, fichName, stmDic, tt, bd ):
 		
 		self.index.append( stmDic.copy() )
 		self.nameIndex.append( fichName )
+		self.title.append( tt )
+		self.body.append( bd )
 
 
 

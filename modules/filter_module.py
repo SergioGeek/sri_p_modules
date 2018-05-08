@@ -9,6 +9,9 @@ class Filter:
 
 		self.soup = BeautifulSoup( html_file, "lxml" ) # Objeto para parsear el html
 		self.text = "" # texto plano extraido del fichero
+
+		self.title = ""
+		self.body = ""
 		
 
 	#Función que filtra los documentos html
@@ -17,6 +20,7 @@ class Filter:
 	
 		# Get Title
 		self.text = self.soup.title.text
+		self.title = self.soup.title.text
 
 
 		# Get Date
@@ -27,6 +31,7 @@ class Filter:
 		body = self.soup.find_all( "p" )
 		for bd in body:
 			self.text = self.text + " " + bd.text
+			self.body += "" + bd.text
 	
 	
 		# Get Tags
